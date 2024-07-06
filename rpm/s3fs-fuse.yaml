@@ -1,0 +1,58 @@
+Name: s3fs-fuse
+Summary: mount an S3 bucket via FUSE
+Version: 1.94
+Release: 0
+Group: Applications
+License: GPLv2
+URL: https://github.com/s3fs-fuse/s3fs-fuse
+SCM: https://github.com/s3fs-fuse/s3fs-fuse
+Sources:
+    - '%{name}-%{version}.tar.gz'
+#Patches:
+#  - 'baz'
+Description: |
+    %{summary}.
+
+    s3fs allows Linux, macOS, and FreeBSD to mount an S3 bucket via  FUSE
+    (Filesystem in Userspace)
+
+    To use with Backblaze B2, see
+    https://help.backblaze.com/hc/en-us/articles/360047773653-Using-S3FS-with-B2
+
+    e.g.
+    s3fs -f -s $mybucket $mntpt -o passwd_file=$pwdf -o url=https://s3.eu-central-003.backblazeb2.com«
+
+    %if "%{?vendor}" == "chum"
+    Title: S3FS
+    Type: addon
+    PackagedBy: nephros
+    Categories:
+     - Filesystem
+    Custom:
+      Repo: %{url}
+    %endif
+
+SetupOptions: -q -n %{name}-%{version}/upstream
+RpmLintIgnore:
+  - 'summary-too-long'
+  - 'description-line-too-long'
+  - 'no-changelogname-tag'
+  - 'invalid-url'
+#Macros:
+#Macros2:
+#Requires:
+PkgBR:
+  - curl-devel
+PkgConfigBR:
+  - fuse
+  - libxml-2.0
+  - libcrypto
+Configure: reconfigure
+#Builder: qmake5
+NoIconCache: true
+#BuildArch: noarch
+#AutoSubPackages:
+#  - doc
+Files:
+  - '%license COPYING'
+  - '%{_bindir}/*'
