@@ -57,7 +57,10 @@ Custom:
 # >> build pre
 # << build pre
 
-%reconfigure --disable-static
+%reconfigure --disable-static \
+    --disable-dependency-tracking \
+    --with-openssl
+
 
 # >> build post
 %make_build

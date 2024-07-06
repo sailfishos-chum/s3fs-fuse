@@ -50,6 +50,11 @@ PkgConfigBR:
   - libxml-2.0
   - libcrypto
 Configure: reconfigure
+ConfigOptions:
+  - --disable-dependency-tracking
+  - --with-openssl
+  # --with-nettle
+  # --with-nss
 Builder: none
 Files:
   - '%license COPYING'
