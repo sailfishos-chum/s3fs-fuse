@@ -25,7 +25,7 @@ BuildRequires:  curl-devel
 %description
 %{summary}.
 
-s3fs allows Linux, macOS, and FreeBSD to mount an S3 bucket via  FUSE
+s3fs allows Linux, macOS, and FreeBSD to mount an S3 bucket via FUSE
 (Filesystem in Userspace)
 
 To use with Backblaze B2, see
@@ -36,9 +36,11 @@ s3fs -f -s $mybucket $mntpt -o passwd_file=$pwdf -o url=https://s3.eu-central-00
 
 %if "%{?vendor}" == "chum"
 Title: S3FS
-Type: addon
+Type: console-application
 PackagedBy: nephros
 Categories:
+ - System
+ - Network
  - Filesystem
 Custom:
   Repo: %{url}
@@ -56,16 +58,16 @@ Custom:
 # << build pre
 
 %reconfigure --disable-static
-make %{?_smp_mflags}
 
 # >> build post
+%make_build
 # << build post
 
 %install
 rm -rf %{buildroot}
 # >> install pre
-# << install pre
 %make_install
+# << install pre
 
 # >> install post
 

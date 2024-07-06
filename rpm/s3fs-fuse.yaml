@@ -13,7 +13,7 @@ Sources:
 Description: |
     %{summary}.
 
-    s3fs allows Linux, macOS, and FreeBSD to mount an S3 bucket via  FUSE
+    s3fs allows Linux, macOS, and FreeBSD to mount an S3 bucket via FUSE
     (Filesystem in Userspace)
 
     To use with Backblaze B2, see
@@ -24,9 +24,11 @@ Description: |
 
     %if "%{?vendor}" == "chum"
     Title: S3FS
-    Type: addon
+    Type: console-application
     PackagedBy: nephros
     Categories:
+     - System
+     - Network
      - Filesystem
     Custom:
       Repo: %{url}
@@ -48,11 +50,7 @@ PkgConfigBR:
   - libxml-2.0
   - libcrypto
 Configure: reconfigure
-#Builder: qmake5
-NoIconCache: true
-#BuildArch: noarch
-#AutoSubPackages:
-#  - doc
+Builder: none
 Files:
   - '%license COPYING'
   - '%{_bindir}/*'
